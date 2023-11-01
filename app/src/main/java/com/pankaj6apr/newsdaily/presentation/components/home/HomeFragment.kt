@@ -8,9 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.CarouselLayoutManager.HORIZONTAL
-import com.google.android.material.carousel.HeroCarouselStrategy
 import com.pankaj6apr.newsdaily.R
 import com.pankaj6apr.newsdaily.common.util.Category
 import com.pankaj6apr.newsdaily.presentation.components.home.categories.NewsCategoriesAdapter
@@ -23,6 +20,10 @@ class HomeFragment : Fragment() {
     private lateinit var rvCategories: RecyclerView
     private lateinit var rvTopHeadlines: RecyclerView
     private lateinit var rvNews: RecyclerView
+    private lateinit var newsCategoriesAdapter: NewsCategoriesAdapter
+    private lateinit var headlinesAdapter: TopHeadlinesAdapter
+    private lateinit var allnewsAdapter: NewsAdapter
+
     private val viewModel: GetNewsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -38,15 +39,29 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.selectedCategory.observe(viewLifecycleOwner) { it ->
+            newsCategoriesAdapter?.setCategory(it)
+        }
+        viewModel.headlinesState.observe(viewLifecycleOwner) { headlinesState ->
+            headlinesAdapter?.setHeadLines(headlinesState.news.articles)
+        }
+        viewModel.newsState.observe(viewLifecycleOwner) { newsState ->
+            allnewsAdapter?.setNewsArticles(newsState.news.articles)
+        }
+
         rvCategories.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rvCategories.adapter = NewsCategoriesAdapter(Category.entries)
+        newsCategoriesAdapter = NewsCategoriesAdapter(context, Category.entries, viewModel)
+        rvCategories.adapter = newsCategoriesAdapter
 
        // rvTopHeadlines.layoutManager = CarouselLayoutManager()
         rvTopHeadlines.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rvTopHeadlines.adapter = TopHeadlinesAdapter(viewModel.newsState.value.news.articles)
-
         rvNews.layoutManager = LinearLayoutManager(context)
-        rvNews.adapter = NewsAdapter(viewModel.newsState.value.news.articles)
+
+        headlinesAdapter = TopHeadlinesAdapter()
+        rvTopHeadlines.adapter = headlinesAdapter
+        allnewsAdapter =  NewsAdapter()
+        rvNews.adapter = allnewsAdapter
+
         super.onViewCreated(view, savedInstanceState)
     }
 }

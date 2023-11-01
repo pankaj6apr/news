@@ -5,17 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pankaj6apr.newsdaily.R
 import com.pankaj6apr.newsdaily.feature_news.domain.model.Article
+import com.pankaj6apr.newsdaily.presentation.components.home.GetNewsViewModel
 import com.squareup.picasso.Picasso
 
 class NewsAdapter(
-    private val headlines: List<Article>
 ) : RecyclerView.Adapter<NewsAdapter.HeadlineViewHolder>() {
 
-    class HeadlineViewHolder(val view: View): ViewHolder(view) {
+    private var newsList: List<Article> = listOf()
+
+    class HeadlineViewHolder(val view: View) : ViewHolder(view) {
         val imageView: ImageView
         val titleView: TextView
         val descriptionView: TextView
@@ -28,17 +31,25 @@ class NewsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeadlineViewHolder {
-        return HeadlineViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_news,
-            parent, false)
+        return HeadlineViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_news,
+                parent, false
+            )
         )
     }
 
-    override fun getItemCount(): Int = headlines.size
+    override fun getItemCount(): Int = newsList.size
 
 
     override fun onBindViewHolder(holder: HeadlineViewHolder, position: Int) {
-        Picasso.get().load(headlines[position].urlToImage).into(holder.imageView)
-        holder.titleView.text = headlines[position].title
-        holder.descriptionView.text = headlines[position].description
+        Picasso.get().load(newsList[position].urlToImage).into(holder.imageView)
+        holder.titleView.text = newsList[position].title
+        holder.descriptionView.text = newsList[position].description
+    }
+
+    fun setNewsArticles(articles: List<Article>) {
+        newsList = articles
+        notifyDataSetChanged()
     }
 }

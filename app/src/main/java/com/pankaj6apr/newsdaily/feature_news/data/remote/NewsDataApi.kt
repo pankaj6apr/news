@@ -10,7 +10,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NewsDataApi {
-    @GET("v2/top-headlines?q={q}&sources={sources}&category={category}&country={country}&page={page}&pageSize={pageSize}&apiKey={api_key}")
+    @GET("v2/top-headlines")
     suspend fun getTopHeadlines(
         @Query("q") query: String ?= null,
         @Query("sources") sources: String ?= null, // comma separated list
@@ -33,6 +33,5 @@ interface NewsDataApi {
         @Query("sortBy") sortBy: SortBy?= null,
         @Query("page") page: Int ?= null,
         @Query("pageSize") pageSize: Int ?= null,
-        @Query("category") category: Category?= null,
         @Query("apiKey") apiKey: String = Constants.API_KEY): NewsDto
 }

@@ -1,6 +1,7 @@
 package com.pankaj6apr.newsdaily.presentation
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,15 +15,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_bar)
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.home->setCurrentFragment(HomeFragment())
-                R.id.person->setCurrentFragment(HomeFragment())
-                R.id.saved->setCurrentFragment(HomeFragment())
-
-            }
-            true
+        val navigateHome: ImageView = findViewById(R.id.navigate_home)
+        navigateHome.setOnClickListener {
+            setCurrentFragment(HomeFragment())
         }
 
 //        setContent {

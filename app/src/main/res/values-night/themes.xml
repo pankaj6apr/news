@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.NewsDaily" parent="Base.Theme.NewsDaily">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-    <style name="Base.Theme.NewsDaily" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 </resources>
