@@ -1,5 +1,5 @@
 # MVVM Andriod News App that uses newsAPI.
-![](NewsHome.gif)
+([NewsHome.gif](https://github.com/pankaj6apr/news/blob/master/Newshome.gif))
 
 ## License
 
