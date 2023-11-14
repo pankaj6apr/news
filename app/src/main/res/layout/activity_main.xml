@@ -8,41 +8,18 @@
 
     <FrameLayout
         android:id="@+id/main_fragment"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_bar" />
+        android:layout_weight="1" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/bottom_bar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:cardBackgroundColor="@color/backgroundSecondary"
-        app:cardElevation="10dp">
-
-        <LinearLayout
-            android:weightSum="3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/navigate_home"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_home_foreground"/>
-            <ImageView
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_foreground"/>
-            <ImageView
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_save_foreground"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/backgroundSecondary"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state"
+        app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>

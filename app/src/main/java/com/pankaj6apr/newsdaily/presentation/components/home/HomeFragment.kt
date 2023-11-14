@@ -40,13 +40,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.selectedCategory.observe(viewLifecycleOwner) { it ->
-            newsCategoriesAdapter?.setCategory(it)
+            newsCategoriesAdapter.setCategory(it)
         }
         viewModel.headlinesState.observe(viewLifecycleOwner) { headlinesState ->
-            headlinesAdapter?.setHeadLines(headlinesState.news.articles)
+            headlinesAdapter.setHeadLines(headlinesState.news.articles)
         }
         viewModel.newsState.observe(viewLifecycleOwner) { newsState ->
-            allnewsAdapter?.setNewsArticles(newsState.news.articles)
+            allnewsAdapter.setNewsArticles(newsState.news.articles)
         }
 
         rvCategories.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

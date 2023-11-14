@@ -4,11 +4,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs> {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
+
 android {
     namespace = "com.pankaj6apr.newsdaily"
     compileSdk = 34
@@ -16,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.pankaj6apr.newsdaily"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -49,11 +45,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+//    packaging {
+//        resources {
+//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+//        }
+//    }
 }
 
 dependencies {
